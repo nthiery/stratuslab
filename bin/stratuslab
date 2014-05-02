@@ -15,12 +15,18 @@
 import sys
 import os
 
+def usage():
+    print "usage: stratus [connect|list]"
+    sys.exit(1)
+
 VIRTUAL_ENV=os.environ["HOME"]+"/env/SL"
 os.environ['VIRTUAL_ENV'] = VIRTUAL_ENV
 os.environ['PATH'] = VIRTUAL_ENV + "/bin:" + os.environ['PATH']
 if 'PYTHONHOME' in os.environ:
     del os.environ['PYTHONHOME']
 
+if len(sys.argv) <= 1:
+    usage()
 command = sys.argv[1]
 if command == "list":
     os.system("stratus-describe-instance")
@@ -28,4 +34,4 @@ elif command == "connect":
     machine = sys.argv[2]
     os.system("stratus-connect-instance {}".format(machine))
 else:
-    raise Exception("Unkown command")
+    usage()
