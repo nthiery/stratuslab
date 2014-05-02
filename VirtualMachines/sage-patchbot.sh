@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Author: Nicolas M. Thiéry
+
 # Run the VM with:
 # stratus-run-instance --cpu=8 --ram=4000 --swap==2000 --volatile-disk 20 --cloud-init 'ssh,$HOME/.ssh/id_rsa.pub#none,./initSage.sh' BsHnKXtlxejHFYIq1oTQvFE2sZy
 # stratus-run-instance --cpu=8 --ram=4000 --swap==2000 --volatile-disk 20 BsHnKXtlxejHFYIq1oTQvFE2sZy
