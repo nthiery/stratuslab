@@ -16,8 +16,9 @@ apt-get dist-upgrade -y             # could we have an already dist-upgraded Ubu
 #  this might not be enough
 # Using the atlas libraries from the distribution would save much compilation time; on 13.10, the package is named libatlas3-base
 # I tried with libatlas3gf-base on 12.10, but it failed so far.
-# texlive: we could reduce to a subset
-apt-get install libfontconfig1 libssl-dev build-essential m4 libcurl4-openssl-dev git libatlas3-base texlive-latex-recommended texlive-science texlive-lang-all
+# texlive: that's for compiling doc-pdfwe could reduce to a subset
+# texinfo: for scipy?
+apt-get install libfontconfig1 libssl-dev build-essential m4 libcurl4-openssl-dev git libatlas3-base texlive-latex-recommended texlive-science texlive-lang-all texinfo
 
 # Add the volatile disk. On this VM, its mount point is /dev/sdc
 # TODO: mount automatically /mnt/volatile at each boot
