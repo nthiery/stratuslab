@@ -12,12 +12,20 @@
 # args = parser.parse_args()
 # print args.accumulate(args.integers)
 
-import sys
 import os
+import subprocess
+import sys
 
 def usage():
-    print "usage: stratus [connect|list]"
+    print "usage: stratus [run|list|connect|kill]"
     sys.exit(1)
+
+commands = {
+    "run": "stratus-run-instance",
+    "list": "stratus-describe-instance",
+    "connect": "stratus-connect-instance",
+    "kill": "stratus-kill-instance",
+    }
 
 VIRTUAL_ENV=os.environ["HOME"]+"/env/SL"
 os.environ['VIRTUAL_ENV'] = VIRTUAL_ENV
@@ -27,11 +35,27 @@ if 'PYTHONHOME' in os.environ:
 
 if len(sys.argv) <= 1:
     usage()
+
 command = sys.argv[1]
-if command == "list":
-    os.system("stratus-describe-instance")
-elif command == "connect":
-    machine = sys.argv[2]
-    os.system("stratus-connect-instance {}".format(machine))
+args = sys.argv[2:]
+
+name_to_id = None
+
+def id(name):
+    global name_to_id
+    if name_to_id is None:
+        output = subprocess.check_output("stratus-describe-instance")
+        name_to_id = {s.split()[-1]: s.split()[0]
+                      for s in output.split('\n')
+                      if s and s[:3] != "id "}
+    return name_to_id.get(name, name)
+
+if command in {"connect", "kill"}:
+    args[0] = id(args[0])
+
+if command in commands:
+    subprocess.call([commands[command]]+args)
+elif command == "shell":
+    os.system(os.environ['SHELL'])
 else:
     usage()
