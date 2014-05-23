@@ -24,6 +24,7 @@ commands = {
     "run": "stratus-run-instance",
     "list": "stratus-describe-instance",
     "connect": "stratus-connect-instance",
+    "shutdown": "stratus-shutdown-instance",
     "kill": "stratus-kill-instance",
     }
 
@@ -50,7 +51,7 @@ def id(name):
                       if s and s[:3] != "id "}
     return name_to_id.get(name, name)
 
-if command in {"connect", "kill"}:
+if command in {"connect", "kill", "shutdown"}:
     args[0] = id(args[0])
 
 if command in commands:
