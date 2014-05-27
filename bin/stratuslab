@@ -16,10 +16,6 @@ import os
 import subprocess
 import sys
 
-def usage():
-    print "usage: stratus [run|list|connect|kill]"
-    sys.exit(1)
-
 commands = {
     "run": "stratus-run-instance",
     "list": "stratus-describe-instance",
@@ -27,6 +23,10 @@ commands = {
     "shutdown": "stratus-shutdown-instance",
     "kill": "stratus-kill-instance",
     }
+
+def usage():
+    print "usage: stratus [shell|{}]".format('|'.join(sorted(commands.keys())))
+    sys.exit(1)
 
 VIRTUAL_ENV=os.environ["HOME"]+"/env/SL"
 os.environ['VIRTUAL_ENV'] = VIRTUAL_ENV
