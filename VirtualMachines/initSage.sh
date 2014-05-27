@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: Julien Leroy
+# Author: Julien Nauroy:
 
 # Run the VM with:
 # stratus-run-instance -type=m1.small --volatile-disk 20 --cloud-init 'ssh,$HOME/.ssh/id_rsa.pub#none,./initSage.sh' BsHnKXtlxejHFYIq1oTQvFE2sZy
